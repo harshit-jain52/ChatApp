@@ -1,8 +1,11 @@
+import 'package:chatapp/screens/login.dart';
+import 'package:chatapp/themes/dark_mode.dart';
+// import 'package:chatapp/themes/light_mode.dart';
 import 'package:flutter/material.dart';
-import 'package:chatapp/home.dart';
 
 void main() {
-  runApp(const MaterialApp(
-    home: Home(),
+  runApp(MaterialApp(
+    home: const LoginPage(),
+    theme: darkMode,
   ));
 }
