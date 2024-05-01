@@ -2,15 +2,16 @@ import 'package:chatapp/components/button.dart';
 import 'package:chatapp/components/input_field.dart';
 import 'package:flutter/material.dart';
 
-class LoginPage extends StatelessWidget {
+class RegisterPage extends StatelessWidget {
   // Text Controllers
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _confirmpwdController = TextEditingController();
 
-  LoginPage({super.key});
+  RegisterPage({super.key});
 
   // Methods
-  void login() {
+  void register() {
     // print('clicked');
   }
 
@@ -44,7 +45,7 @@ class LoginPage extends StatelessWidget {
 
               const SizedBox(height: 20),
 
-              Text("Welcome Back",
+              Text("Register to start Chatting",
                   style: TextStyle(
                       fontSize: 20,
                       color: Theme.of(context).colorScheme.inversePrimary)),
@@ -64,19 +65,27 @@ class LoginPage extends StatelessWidget {
                 inputController: _passwordController,
               ),
 
+              const SizedBox(height: 10),
+
+              InputField(
+                placeholder: 'Confirm Password',
+                obscure: true,
+                inputController: _confirmpwdController,
+              ),
+
               const SizedBox(height: 20),
 
-              Button(buttonText: "Log In", onTap: login),
+              Button(buttonText: "Register", onTap: register),
 
               const SizedBox(height: 20),
 
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text("Don't have an account? ",
+                  Text("Already have an account? ",
                       style: TextStyle(
                           color: Theme.of(context).colorScheme.inversePrimary)),
-                  Text("Sign Up",
+                  Text("Log In",
                       style: TextStyle(
                           color: Theme.of(context).colorScheme.primary,
                           fontWeight: FontWeight.bold)),

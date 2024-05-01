@@ -3,14 +3,18 @@ import 'package:flutter/material.dart';
 class InputField extends StatelessWidget {
   final String placeholder;
   final bool obscure;
+  final TextEditingController inputController;
   const InputField(
-      {super.key, required this.placeholder, this.obscure = false});
-
+      {super.key,
+      required this.placeholder,
+      this.obscure = false,
+      required this.inputController});
   @override
   Widget build(BuildContext context) {
     return Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20.0),
         child: TextField(
+            controller: inputController,
             obscureText: obscure,
             style:
                 TextStyle(color: Theme.of(context).colorScheme.inversePrimary),
