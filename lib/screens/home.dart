@@ -151,7 +151,10 @@ class Home extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => ChatScreen(receiverEmail: userData["email"]),
+            builder: (context) => ChatScreen(
+              receiverEmail: userData["email"],
+              receiverID: userData["uid"],
+            ),
           ),
         );
       },
