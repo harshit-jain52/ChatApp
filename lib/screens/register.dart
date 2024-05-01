@@ -1,14 +1,17 @@
 import 'package:chatapp/components/button.dart';
 import 'package:chatapp/components/input_field.dart';
+import 'package:chatapp/components/title_bar.dart';
 import 'package:flutter/material.dart';
 
 class RegisterPage extends StatelessWidget {
   // Text Controllers
-  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _confirmpwdController = TextEditingController();
 
-  RegisterPage({super.key});
+  final void Function()? goToLogin;
+
+  RegisterPage({super.key, this.goToLogin});
 
   // Methods
   void register() {
@@ -19,16 +22,7 @@ class RegisterPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Theme.of(context).colorScheme.background,
-        appBar: AppBar(
-          title: const Text('Flutter ChatApp'),
-          titleTextStyle: TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-            color: Theme.of(context).colorScheme.inversePrimary,
-          ),
-          backgroundColor: Theme.of(context).colorScheme.primary,
-          centerTitle: true,
-        ),
+        appBar: TitleBar(header: "Flutter Chat App"),
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -53,8 +47,8 @@ class RegisterPage extends StatelessWidget {
               const SizedBox(height: 20),
 
               InputField(
-                placeholder: 'Username',
-                inputController: _usernameController,
+                placeholder: 'Email',
+                inputController: _emailController,
               ),
 
               const SizedBox(height: 10),
@@ -85,10 +79,13 @@ class RegisterPage extends StatelessWidget {
                   Text("Already have an account? ",
                       style: TextStyle(
                           color: Theme.of(context).colorScheme.inversePrimary)),
-                  Text("Log In",
-                      style: TextStyle(
-                          color: Theme.of(context).colorScheme.primary,
-                          fontWeight: FontWeight.bold)),
+                  GestureDetector(
+                    onTap: goToLogin,
+                    child: Text("Log In",
+                        style: TextStyle(
+                            color: Theme.of(context).colorScheme.primary,
+                            fontWeight: FontWeight.bold)),
+                  ),
                 ],
               ),
             ],
