@@ -1,4 +1,4 @@
-import 'package:chatapp/auth/auth_service.dart';
+import 'package:chatapp/services/auth/auth_service.dart';
 import 'package:chatapp/components/button.dart';
 import 'package:chatapp/components/input_field.dart';
 import 'package:chatapp/components/title_bar.dart';

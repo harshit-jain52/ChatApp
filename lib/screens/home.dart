@@ -1,15 +1,21 @@
-import 'package:chatapp/auth/auth_service.dart';
+import 'package:chatapp/components/user_tile.dart';
+import 'package:chatapp/screens/chat.dart';
+import 'package:chatapp/services/auth/auth_service.dart';
 import 'package:chatapp/components/title_bar.dart';
 import 'package:chatapp/screens/settings.dart';
+import 'package:chatapp/services/chat/chat_service.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Home extends StatelessWidget {
-  const Home({super.key});
+  Home({super.key});
+
+  // services
+  final AuthService _authService = AuthService();
+  final ChatService _chatService = ChatService();
 
   void logout() {
-    final authService = AuthService();
-    authService.signOut();
+    _authService.signOut();
   }
 
   void launchURL() async {
@@ -106,6 +112,49 @@ class Home extends StatelessWidget {
               ),
             ],
           )),
+      body: _buildUserList(),
+    );
+  }
+
+  Widget _buildUserList() {
+    return StreamBuilder(
+      stream: _chatService.getUsers(),
+      builder: (context, snapshot) {
+        // error
+        if (snapshot.hasError) {
+          return const Text("Error");
+        }
+
+        // loading
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const CircularProgressIndicator();
+        }
+
+        // data: list view
+        return ListView(
+          padding: const EdgeInsets.all(10),
+          children: snapshot.data!
+              .where((element) =>
+                  element["email"] != _authService.getCurrentUser()!.email)
+              .map<Widget>((userData) => _buildUserListItem(userData, context))
+              .toList(),
+        );
+      },
+    );
+  }
+
+  Widget _buildUserListItem(
+      Map<String, dynamic> userData, BuildContext context) {
+    return UserTile(
+      name: userData["email"],
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ChatScreen(receiverEmail: userData["email"]),
+          ),
+        );
+      },
     );
   }
 }
