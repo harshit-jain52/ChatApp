@@ -44,7 +44,7 @@ class RegisterPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Theme.of(context).colorScheme.background,
-        appBar: TitleBar(header: "Flutter Chat App"),
+        appBar: const TitleBar(header: "Flutter Chat App"),
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,

@@ -1,5 +1,5 @@
 import 'package:chatapp/components/title_bar.dart';
-import 'package:chatapp/themes/theme_provider.dart';
+import 'package:chatapp/providers/theme_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
