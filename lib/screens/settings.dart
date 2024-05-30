@@ -2,13 +2,14 @@ import 'package:chatapp/components/title_bar.dart';
 import 'package:chatapp/providers/theme_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class Settings extends StatelessWidget {
+class Settings extends ConsumerWidget {
   const Settings({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final theme = ref.watch(themeProvider.notifier);
     return Scaffold(
       appBar: const TitleBar(header: "Settings"),
       body: Container(
@@ -28,11 +29,9 @@ class Settings extends StatelessWidget {
                   color: Theme.of(context).colorScheme.inversePrimary),
             ),
             CupertinoSwitch(
-              value: Provider.of<ThemeProvider>(context).isDarkMode,
-              onChanged: (value) =>
-                  Provider.of<ThemeProvider>(context, listen: false)
-                      .toggleTheme(),
-            )
+              value: theme.isDarkMode,
+              onChanged: (value) => theme.toggleTheme(),
+            ),
           ],
         ),
       ),

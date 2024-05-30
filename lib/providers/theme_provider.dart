@@ -1,20 +1,16 @@
 import 'package:chatapp/themes/dark_mode.dart';
 import 'package:chatapp/themes/light_mode.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class ThemeProvider extends ChangeNotifier {
-  ThemeData _themeData = darkMode;
+class ThemeProvider extends StateNotifier<ThemeData> {
+  ThemeProvider() : super(darkMode);
 
-  ThemeData get themeData => _themeData;
-  bool get isDarkMode => _themeData == darkMode;
-
-  set themeData(ThemeData themeData) {
-    _themeData = themeData;
-    notifyListeners();
-  }
+  bool get isDarkMode => state == darkMode;
 
   void toggleTheme() {
-    _themeData = _themeData == darkMode ? lightMode : darkMode;
-    notifyListeners();
+    state = state == darkMode ? lightMode : darkMode;
   }
 }
+
+final themeProvider = StateNotifierProvider<ThemeProvider, ThemeData>((ref) => ThemeProvider());
